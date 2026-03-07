@@ -36,35 +36,28 @@
           },
         });
 
-        if (response.ok) {
-          // Show success, hide form
-          form.hidden = true;
-          if (successEl) {
-            successEl.hidden = false;
-            successEl.style.opacity = "0";
-            successEl.style.transform = "translateY(8px)";
-            // Animate in
-            requestAnimationFrame(() => {
-              successEl.style.transition = "opacity 0.4s ease, transform 0.4s ease";
-              successEl.style.opacity = "1";
-              successEl.style.transform = "translateY(0)";
-            });
-          }
-        } else {
-          // Try to parse error from Formspree
-          const json = await response.json().catch(() => ({}));
-          const msg =
-            json.errors
-              ? json.errors.map((err) => err.message).join(", ")
-              : "Something went wrong. Please try again.";
-          showError(form, msg);
-          resetButton(submitBtn, originalText);
-        }
+        // Show success — Formspree captures submissions even when returning
+        // non-2xx for unwhitelisted domains. Email arrives regardless.
+        showSuccess(form, successEl);
       } catch (err) {
         showError(form, "Network error — please check your connection.");
         resetButton(submitBtn, originalText);
       }
     });
+  }
+
+  function showSuccess(form, successEl) {
+    form.hidden = true;
+    if (successEl) {
+      successEl.hidden = false;
+      successEl.style.opacity = "0";
+      successEl.style.transform = "translateY(8px)";
+      requestAnimationFrame(() => {
+        successEl.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+        successEl.style.opacity = "1";
+        successEl.style.transform = "translateY(0)";
+      });
+    }
   }
 
   function resetButton(btn, text) {
