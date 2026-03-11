@@ -1,5 +1,5 @@
 /* =========================================
-   SanoIQ — Landing Page Styles
+   Kyronix — Landing Page Styles
    Dark health-tech aesthetic, mobile-first
    ========================================= */
 
@@ -60,12 +60,8 @@ body {
   display: inline-block;
 }
 
-.wordmark-health {
+.wordmark-single {
   color: #fff;
-}
-
-.wordmark-iq {
-  color: var(--blue);
 }
 
 /* ---- HERO ---- */
@@ -441,6 +437,18 @@ body {
   font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.footer-nav a {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+  color: var(--text-muted);
 }
 
 .footer-text {
