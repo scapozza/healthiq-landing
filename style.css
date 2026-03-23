@@ -10,6 +10,19 @@
   padding: 0;
 }
 
+/* Accessibility: visually hidden but screen-reader accessible */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 :root {
   --blue: #1C66BA;
   --blue-light: #2979d4;
@@ -20,8 +33,8 @@
   --border: rgba(255, 255, 255, 0.07);
   --border-accent: rgba(28, 102, 186, 0.4);
   --text: #E8EAF0;
-  --text-muted: #7A7F94;
-  --text-dim: #4A4F64;
+  --text-muted: #9DA3B8;  /* was #7A7F94 — bumped for WCAG AA contrast on dark bg */
+  --text-dim: #6B7280;    /* was #4A4F64 — bumped for WCAG AA contrast on dark bg */
   --radius: 14px;
   --radius-sm: 8px;
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",

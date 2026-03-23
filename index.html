@@ -27,15 +27,18 @@
         to give you truly personalized health insights — for workouts, longevity, nutrition, supplements, and medications.
       </p>
 
-      <form id="waitlist-form" class="email-form" action="https://formspree.io/f/xgonegew" method="POST">
+      <form id="waitlist-form" class="email-form" action="https://formspree.io/f/xgonegew" method="POST" aria-label="Join the Kyronix waitlist">
         <div class="form-row">
+          <label for="email-top" class="visually-hidden">Email address</label>
           <input
             type="email"
+            id="email-top"
             name="email"
             placeholder="Enter your email"
             required
             class="email-input"
             autocomplete="email"
+            aria-required="true"
           />
           <button type="submit" class="cta-button">Join Waitlist</button>
         </div>
@@ -150,15 +153,18 @@
       <h3 class="cta-title">Ready to know your body?</h3>
       <p class="cta-sub">Join the waitlist. Be first to unlock your health intelligence.</p>
 
-      <form id="waitlist-form-bottom" class="email-form" action="https://formspree.io/f/xgonegew" method="POST">
+      <form id="waitlist-form-bottom" class="email-form" action="https://formspree.io/f/xgonegew" method="POST" aria-label="Join the Kyronix waitlist">
         <div class="form-row">
+          <label for="email-bottom" class="visually-hidden">Email address</label>
           <input
             type="email"
+            id="email-bottom"
             name="email"
             placeholder="Enter your email"
             required
             class="email-input"
             autocomplete="email"
+            aria-required="true"
           />
           <button type="submit" class="cta-button">Join Waitlist</button>
         </div>
