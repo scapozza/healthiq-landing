@@ -1,500 +1,378 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kyronix — Personalized Health Intelligence from DNA + Biometrics</title>
   <meta name="description" content="Kyronix combines your DNA, labs, wearables, and AI to deliver personalized insights for performance, nutrition, supplements, longevity, and medication safety. Join early access." />
-  <meta property="og:title" content="Kyronix — Personalized Health Intelligence" />
-  <meta property="og:description" content="Finally, health recommendations made for your biology — not averages. DNA + biometrics + AI." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://kyronix.health/og-image.png" />
-  <link rel="stylesheet" href="style.css" />
   <style>
-    /* ---- Trust Strip ---- */
-    .trust-strip {
-      background: rgba(28,102,186,0.06);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 20px 24px;
-      overflow: hidden;
+    :root {
+      --bg: #0b1020;
+      --card: #101833;
+      --muted: #aab4d6;
+      --text: #eef2ff;
+      --brand: #6ee7b7;
+      --brand-2: #60a5fa;
+      --border: #26345f;
+      --max: 1120px;
+      --radius: 14px;
     }
-    .trust-strip-inner {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px 40px;
-      justify-content: center;
-      align-items: center;
-      max-width: 900px;
-      margin: 0 auto;
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 700px at 75% -10%, #1d2e63 0%, var(--bg) 60%);
+      line-height: 1.5;
     }
-    .trust-item {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-    }
-    .trust-item span.icon { font-size: 1rem; }
-
-    /* ---- Problem Section ---- */
-    .problem {
-      padding: 100px 0;
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-    }
-    .problem-body {
-      max-width: 620px;
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      line-height: 1.8;
-    }
-    .problem-body strong { color: #fff; }
-
-    /* ---- Use Cases ---- */
-    .use-cases {
-      padding: 100px 0;
-      background: linear-gradient(180deg, #0D0D14 0%, var(--bg) 100%);
-      border-top: 1px solid var(--border);
-    }
-    .use-cases-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    @media (min-width: 640px) { .use-cases-grid { grid-template-columns: repeat(2, 1fr); } }
-    .use-case-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 32px;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .use-case-card:hover {
-      border-color: var(--border-accent);
-      transform: translateY(-2px);
-    }
-    .use-case-icon { font-size: 1.8rem; margin-bottom: 14px; display: block; }
-    .use-case-title { color: #fff; font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
-    .use-case-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; }
-
-    /* ---- Comparison Grid ---- */
-    .comparison {
-      padding: 100px 0;
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-    }
-    .comparison-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-      overflow-x: auto;
-      display: block;
-    }
-    .comparison-table th {
-      padding: 14px 20px;
-      text-align: left;
-      color: var(--text-dim);
-      font-weight: 600;
-      border-bottom: 1px solid var(--border);
-      white-space: nowrap;
-    }
-    .comparison-table th.kyronix-col { color: var(--blue); }
-    .comparison-table td {
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border);
-      color: var(--text-muted);
-    }
-    .comparison-table td:first-child { color: #fff; font-weight: 500; }
-    .comparison-table td.kyronix-col { color: #22c55e; font-weight: 600; }
-    .comparison-table tr:hover td { background: rgba(255,255,255,0.02); }
-    .check { color: #22c55e; }
-    .cross { color: #4a4f64; }
-    .partial { color: #f59e0b; }
-
-    /* ---- FAQ ---- */
-    .faq {
-      padding: 100px 0;
-      background: linear-gradient(180deg, #0D0D14 0%, var(--bg) 100%);
-      border-top: 1px solid var(--border);
-    }
-    .faq-list { max-width: 720px; display: flex; flex-direction: column; gap: 0; }
-    .faq-item {
-      border-bottom: 1px solid var(--border);
-      padding: 24px 0;
-    }
-    .faq-q {
-      color: #fff;
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      cursor: pointer;
-    }
-    .faq-a {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-
-    /* ---- Eyebrow ---- */
+    .container { width: min(var(--max), 92vw); margin: 0 auto; }
+    section { padding: 72px 0; }
+    h1, h2, h3 { line-height: 1.15; margin: 0 0 14px; }
+    h1 { font-size: clamp(2rem, 5vw, 3.25rem); }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+    h3 { font-size: 1.15rem; }
+    p { margin: 0 0 14px; color: var(--muted); }
     .eyebrow {
-      color: var(--blue);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      display: block;
-    }
-
-    /* ---- Secondary CTA button ---- */
-    .cta-button-secondary {
-      background: transparent;
-      border: 1px solid var(--border-accent);
-      border-radius: var(--radius-sm);
-      color: var(--text-muted);
-      cursor: pointer;
-      font-family: var(--font);
-      font-size: 1rem;
-      font-weight: 500;
-      padding: 14px 24px;
-      transition: border-color 0.2s, color 0.2s;
-      text-decoration: none;
       display: inline-block;
+      border: 1px solid var(--border);
+      color: #d3dbff;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      margin-bottom: 18px;
+      background: rgba(255,255,255,0.02);
     }
-    .cta-button-secondary:hover { border-color: var(--blue); color: #fff; }
-
-    /* Hero CTA row */
-    .hero-cta-row {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 32px;
-    }
-    .hero-cta-row .cta-button { padding: 14px 32px; font-size: 1rem; }
-
-    /* Footer expanded */
-    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
-    .footer-links a {
-      color: var(--text-dim);
-      font-size: 0.85rem;
+    .hero { padding: 92px 0 72px; }
+    .hero p.lead { font-size: 1.12rem; max-width: 760px; }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 10px;
       text-decoration: none;
-      transition: color 0.2s;
+      font-weight: 600;
+      border: 1px solid transparent;
     }
-    .footer-links a:hover { color: var(--text-muted); }
-    .footer-disclaimer {
-      color: var(--text-dim);
-      font-size: 0.75rem;
-      line-height: 1.6;
-      margin-top: 20px;
-      max-width: 700px;
+    .btn-primary { background: linear-gradient(120deg, var(--brand), var(--brand-2)); color: #051224; }
+    .btn-secondary { border-color: var(--border); color: var(--text); }
+    .micro { color: #d5ddff; font-size: 0.9rem; margin-top: 10px; }
+
+    .strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+    }
+    .pill-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      padding: 16px 0;
+    }
+    .pill {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 12px;
+      text-align: center;
+      font-size: 0.92rem;
+      color: #d5ddff;
+      background: #0e1735;
+    }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+    .card {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #101833, #0f1730);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+    table { width: 100%; border-collapse: collapse; min-width: 680px; background: #0f1730; }
+    th, td { padding: 14px 12px; border-bottom: 1px solid var(--border); text-align: left; color: #d9e0ff; }
+    th { color: #f0f4ff; }
+    tr:last-child td { border-bottom: 0; }
+
+    .faq details {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      background: #0f1730;
+    }
+    .faq summary { cursor: pointer; font-weight: 600; }
+    .cta-final {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      background: linear-gradient(180deg, rgba(96,165,250,.12), rgba(110,231,183,.08));
+    }
+    .form {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 18px;
+      background: #0d1530;
+      max-width: 640px;
+    }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    label { font-size: 0.88rem; color: #dbe2ff; display: block; margin-bottom: 6px; }
+    input, select {
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0b122b;
+      color: var(--text);
+    }
+    .form .full { grid-column: 1 / -1; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 0 50px;
+      color: #c8d1f5;
+    }
+    footer a { color: #dce5ff; text-decoration: none; margin-right: 14px; }
+
+    @media (max-width: 980px) {
+      .pill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-3 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      section { padding: 56px 0; }
+      .hero { padding-top: 74px; }
+      .pill-grid, .grid-4 { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="wordmark">Kyronix</div>
-
+  <header class="hero" id="hero">
+    <div class="container">
       <span class="eyebrow">Coming Soon on the App Store</span>
-
-      <h1 class="tagline">Finally, health recommendations<br>made for your biology — not averages.</h1>
-
-      <p class="sub-tagline">
-        Kyronix combines your genetic profile, biometrics, and AI to deliver personalized guidance
-        for workouts, nutrition, supplements, longevity, and medication safety.
-      </p>
-
-      <form id="waitlist-form" class="email-form" action="https://formspree.io/f/xgonegew" method="POST" aria-label="Join the Kyronix waitlist">
-        <div class="form-row">
-          <label for="email-top" class="visually-hidden">Email address</label>
-          <input
-            type="email"
-            id="email-top"
-            name="email"
-            placeholder="Enter your email"
-            required
-            class="email-input"
-            autocomplete="email"
-            aria-required="true"
-          />
-          <button type="submit" class="cta-button">Join Early Access</button>
-        </div>
-        <p class="form-note">No spam. Ever. Early users get priority access at launch.</p>
-      </form>
-
-      <div id="form-success" class="form-success" hidden>
-        <span class="success-icon">✓</span>
-        You're on the list! We'll be in touch.
+      <h1>Your DNA + daily data, turned into a personal health playbook.</h1>
+      <p class="lead">Kyronix combines your genetic profile, biometrics, and AI to deliver personalized guidance for workouts, nutrition, supplements, longevity, and medication safety.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#waitlist">Join Early Access</a>
+        <a class="btn btn-secondary" href="#how-it-works">See How It Works</a>
       </div>
-
-      <p class="social-proof" style="margin-top:32px">
-        <span class="proof-dot"></span>
-        Join early access — be first when we launch
-      </p>
+      <p class="micro">No spam. Ever. Early users get priority access at launch.</p>
     </div>
-    <div class="hero-glow"></div>
-  </section>
+  </header>
 
-  <!-- TRUST STRIP -->
-  <div class="trust-strip">
-    <div class="trust-strip-inner">
-      <div class="trust-item"><span class="icon">🔒</span> Privacy-first by design</div>
-      <div class="trust-item"><span class="icon">🔐</span> Your data stays encrypted</div>
-      <div class="trust-item"><span class="icon">🎛</span> You control what you connect</div>
-      <div class="trust-item"><span class="icon">🚫</span> Built for insights, not ads</div>
-      <div class="trust-item"><span class="icon">🧬</span> DNA + biometrics + AI combined</div>
+  <div class="strip" aria-label="Trust and privacy highlights">
+    <div class="container pill-grid">
+      <div class="pill">Privacy-first by design</div>
+      <div class="pill">Your data stays encrypted</div>
+      <div class="pill">You control what you connect</div>
+      <div class="pill">Built for insights, not ads</div>
     </div>
   </div>
 
-  <!-- PROBLEM -->
-  <section class="problem">
+  <section id="problem">
     <div class="container">
-      <h2 class="section-label">Why It Matters</h2>
-      <h3 class="section-title">Most health advice<br>isn't built for you.</h3>
-      <p class="problem-body">
-        Most apps give the same recommendations to everyone. But your genes, lab markers,
-        wearable trends, and medications create a health profile that's <strong>unique to you</strong>.<br><br>
-        Kyronix helps you stop guessing and start making decisions based on your own biology
-        and daily signals — not population averages written for someone else.
+      <h2>Most health advice isn’t built for you.</h2>
+      <p>Most apps give the same recommendations to everyone. But your genes, lab markers, wearable trends, and medications create a health profile that’s unique to you.</p>
+      <p>Kyronix helps you stop guessing and start making decisions based on your own biology and daily signals.</p>
+    </div>
+  </section>
+
+  <section id="how-it-works">
+    <div class="container">
+      <h2>How it works</h2>
+      <div class="grid-3">
+        <article class="card">
+          <h3>1) Connect your data</h3>
+          <p>Import your DNA file, link wearables, and add key labs and medications.</p>
+        </article>
+        <article class="card">
+          <h3>2) Build your health model</h3>
+          <p>Kyronix analyzes interactions across genetics, biomarkers, and daily trends.</p>
+        </article>
+        <article class="card">
+          <h3>3) Get clear next actions</h3>
+          <p>Receive practical guidance you can use now for training, nutrition, supplements, and safety.</p>
+        </article>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#waitlist">Get Early Access</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="benefits">
+    <div class="container">
+      <h2>What you can do with Kyronix</h2>
+      <div class="grid-4">
+        <article class="card">
+          <h3>Train smarter</h3>
+          <p>Get workout guidance based on recovery patterns, biometrics, and genetic tendencies.</p>
+        </article>
+        <article class="card">
+          <h3>Personalize nutrition</h3>
+          <p>Understand how your body may respond to macros, micronutrients, and timing strategies.</p>
+        </article>
+        <article class="card">
+          <h3>Reduce supplement guesswork</h3>
+          <p>Prioritize supplements with stronger relevance to your profile and goals.</p>
+        </article>
+        <article class="card">
+          <h3>Check medication interactions</h3>
+          <p>Flag potential genetic and supplement considerations to discuss with your clinician.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="use-cases">
+    <div class="container">
+      <h2>Built for real-life decisions</h2>
+      <div class="grid-4">
+        <article class="card">
+          <h3>Workout Optimization</h3>
+          <p>Know when to push, when to recover, and what supports performance for your profile.</p>
+        </article>
+        <article class="card">
+          <h3>Nutrition Planning</h3>
+          <p>Move from generic diet rules to data-informed choices tailored to your biology.</p>
+        </article>
+        <article class="card">
+          <h3>Medication Safety Awareness</h3>
+          <p>Bring better context to healthcare conversations with profile-aware insights.</p>
+        </article>
+        <article class="card">
+          <h3>Longevity Strategy</h3>
+          <p>Turn scattered health data into a clear, long-term plan.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="comparison">
+    <div class="container">
+      <h2>Why Kyronix is different</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Capability</th>
+              <th>Generic Fitness Apps</th>
+              <th>DNA-Only Reports</th>
+              <th>Kyronix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Daily biometric context</td>
+              <td>Limited</td>
+              <td>No</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Genetic personalization</td>
+              <td>No</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Lab + wearable + DNA combined</td>
+              <td>No</td>
+              <td>No</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Medication/supplement safety context</td>
+              <td>Rare</td>
+              <td>Limited</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Actionable daily guidance</td>
+              <td>Basic</td>
+              <td>Static</td>
+              <td>Personalized</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq">
+    <div class="container">
+      <h2>FAQ</h2>
+      <details>
+        <summary>Is Kyronix a medical provider?</summary>
+        <p>No. Kyronix provides educational insights to support informed decisions. It does not diagnose, treat, or replace professional medical care.</p>
+      </details>
+      <details>
+        <summary>Do I need a DNA test to use Kyronix?</summary>
+        <p>No, but adding DNA data improves personalization depth. You can still get value from wearable and lab data.</p>
+      </details>
+      <details>
+        <summary>Is my health data private?</summary>
+        <p>Kyronix is built with privacy-first principles, encryption, and user-controlled data connections.</p>
+      </details>
+      <details>
+        <summary>Can Kyronix tell me which medications are safe?</summary>
+        <p>Kyronix highlights potential considerations and interactions to discuss with your licensed clinician. Medical decisions should always be made with your doctor.</p>
+      </details>
+      <details>
+        <summary>When will it launch?</summary>
+        <p>We’re currently preparing for App Store launch. Join early access for updates and priority onboarding.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="waitlist">
+    <div class="container">
+      <div class="cta-final">
+        <h2>Ready for health guidance built around you?</h2>
+        <p>Join the Kyronix early access list and be first to try personalized health intelligence.</p>
+        <form class="form" method="post" action="#" aria-label="Kyronix waitlist form">
+          <h3 style="margin-top:0">Get early access to Kyronix</h3>
+          <div class="form-grid">
+            <div>
+              <label for="firstName">First name</label>
+              <input id="firstName" name="firstName" type="text" autocomplete="given-name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="full">
+              <label for="goal">Primary goal</label>
+              <select id="goal" name="goal" required>
+                <option value="">Select one</option>
+                <option>Performance</option>
+                <option>Longevity</option>
+                <option>Nutrition</option>
+                <option>Medication Safety</option>
+                <option>General Health</option>
+              </select>
+            </div>
+            <div class="full">
+              <button class="btn btn-primary" type="submit">Request Early Access</button>
+            </div>
+          </div>
+          <p class="micro">By joining, you agree to receive product updates. You can unsubscribe anytime.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> Kyronix</p>
+      <p>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Medical Disclaimer</a>
+        <a href="mailto:hello@kyronix.health">Contact</a>
       </p>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="how-it-works" id="how">
-    <div class="container">
-      <h2 class="section-label">How It Works</h2>
-      <h3 class="section-title">Up and running<br>in three steps.</h3>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">01</div>
-          <div class="step-content">
-            <h4 class="step-title">Connect your data</h4>
-            <p class="step-desc">Import your DNA file, link wearables, and add key labs and medications. Kyronix reads what you've already got.</p>
-          </div>
-        </div>
-        <div class="step-connector" aria-hidden="true"></div>
-        <div class="step">
-          <div class="step-number">02</div>
-          <div class="step-content">
-            <h4 class="step-title">Build your health model</h4>
-            <p class="step-desc">Kyronix analyzes interactions across genetics, biomarkers, and daily trends — a living picture of you, not a generic average.</p>
-          </div>
-        </div>
-        <div class="step-connector" aria-hidden="true"></div>
-        <div class="step">
-          <div class="step-number">03</div>
-          <div class="step-content">
-            <h4 class="step-title">Get clear next actions</h4>
-            <p class="step-desc">Practical, personalized guidance you can use now — training, nutrition, supplement, and safety recommendations that update as your data does.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="features" id="features">
-    <div class="container">
-      <h2 class="section-label">Core Features</h2>
-      <h3 class="section-title">Every piece of your health,<br>finally connected.</h3>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🧬</div>
-          <h4 class="feature-title">Train Smarter</h4>
-          <p class="feature-desc">Get workout guidance based on recovery patterns, biometrics, and genetic tendencies — know when to push and when to recover.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🥗</div>
-          <h4 class="feature-title">Personalize Nutrition</h4>
-          <p class="feature-desc">Move from generic diet rules to data-informed choices tailored to your biology — macros, micronutrients, and timing that fit you.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">💊</div>
-          <h4 class="feature-title">Reduce Supplement Guesswork</h4>
-          <p class="feature-desc">Prioritize supplements with stronger relevance to your genetic profile and health goals. Stop buying what doesn't fit your biology.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⚕️</div>
-          <h4 class="feature-title">Medication Safety Awareness</h4>
-          <p class="feature-desc">Flag potential genetic and supplement considerations to bring to your clinician — better context for smarter conversations.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
-          <h4 class="feature-title">100+ Lab Panels</h4>
-          <p class="feature-desc">Import lab results with a photo. Track everything from HbA1c to testosterone to cancer markers with trend analysis over time.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🤖</div>
-          <h4 class="feature-title">AI Health Companion</h4>
-          <p class="feature-desc">Kyro knows your genetics, labs, and daily data. Ask anything — and get answers grounded in your actual biology.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- USE CASES -->
-  <section class="use-cases">
-    <div class="container">
-      <h2 class="section-label">Built for Real Decisions</h2>
-      <h3 class="section-title">Health guidance for<br>how you actually live.</h3>
-      <div class="use-cases-grid">
-        <div class="use-case-card">
-          <span class="use-case-icon">🏋️</span>
-          <div class="use-case-title">Workout Optimization</div>
-          <p class="use-case-desc">Know when to push, when to recover, and what supports performance based on your HRV, sleep, and genetic recovery profile.</p>
-        </div>
-        <div class="use-case-card">
-          <span class="use-case-icon">🥦</span>
-          <div class="use-case-title">Nutrition Planning</div>
-          <p class="use-case-desc">Move from generic diet rules to data-informed choices tailored to your metabolic biology and micronutrient variants.</p>
-        </div>
-        <div class="use-case-card">
-          <span class="use-case-icon">🩺</span>
-          <div class="use-case-title">Medication Safety</div>
-          <p class="use-case-desc">Bring better context to healthcare conversations with profile-aware insights on how your genetics interact with medications.</p>
-        </div>
-        <div class="use-case-card">
-          <span class="use-case-icon">🔮</span>
-          <div class="use-case-title">Longevity Strategy</div>
-          <p class="use-case-desc">Turn scattered health data into a clear, long-term plan. Track trends and build habits that support healthy aging.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMPARISON -->
-  <section class="comparison">
-    <div class="container">
-      <h2 class="section-label">Why Kyronix</h2>
-      <h3 class="section-title">Not all health apps<br>are the same.</h3>
-      <table class="comparison-table">
-        <thead>
-          <tr>
-            <th>Capability</th>
-            <th>Generic Fitness Apps</th>
-            <th>DNA-Only Reports</th>
-            <th class="kyronix-col">Kyronix</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Daily biometric context</td>
-            <td class="partial">Limited</td>
-            <td class="cross">✗ No</td>
-            <td class="kyronix-col">✓ Yes</td>
-          </tr>
-          <tr>
-            <td>Genetic personalization</td>
-            <td class="cross">✗ No</td>
-            <td class="check">✓ Yes</td>
-            <td class="kyronix-col">✓ Yes</td>
-          </tr>
-          <tr>
-            <td>Lab + wearable + DNA combined</td>
-            <td class="cross">✗ No</td>
-            <td class="cross">✗ No</td>
-            <td class="kyronix-col">✓ Yes</td>
-          </tr>
-          <tr>
-            <td>Medication &amp; supplement context</td>
-            <td class="partial">Rare</td>
-            <td class="partial">Limited</td>
-            <td class="kyronix-col">✓ Yes</td>
-          </tr>
-          <tr>
-            <td>Actionable daily guidance</td>
-            <td class="partial">Generic</td>
-            <td class="partial">Static</td>
-            <td class="kyronix-col">✓ Personalized</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="faq">
-    <div class="container">
-      <h2 class="section-label">FAQ</h2>
-      <h3 class="section-title">Common questions.</h3>
-      <div class="faq-list">
-        <div class="faq-item">
-          <div class="faq-q">Is Kyronix a medical provider?</div>
-          <p class="faq-a">No. Kyronix provides educational insights to support informed decisions. It does not diagnose, treat, or replace professional medical care. Always work with your licensed clinician for medical decisions.</p>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">Do I need a DNA test to use Kyronix?</div>
-          <p class="faq-a">No — but adding DNA data improves personalization depth significantly. You can start with just wearable and lab data and add your DNA file anytime. AncestryDNA and 23andMe files are supported.</p>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">Is my health data private?</div>
-          <p class="faq-a">Yes. Kyronix is built with privacy-first principles. Your data is encrypted, you control exactly what you connect, and we never sell your data or use it for advertising.</p>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">Can Kyronix tell me which medications are safe?</div>
-          <p class="faq-a">Kyronix highlights potential genetic considerations and interactions to discuss with your licensed clinician. It provides context, not prescriptions. Medical decisions should always be made with your doctor.</p>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">When will it launch?</div>
-          <p class="faq-a">We're preparing for App Store launch now. Join the early access list for updates and priority onboarding when we go live.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BOTTOM CTA -->
-  <section class="bottom-cta">
-    <div class="container">
-      <h3 class="cta-title">Ready for health guidance<br>built around you?</h3>
-      <p class="cta-sub">Join the early access list and be first to try personalized health intelligence.</p>
-
-      <form id="waitlist-form-bottom" class="email-form" action="https://formspree.io/f/xgonegew" method="POST" aria-label="Join the Kyronix waitlist">
-        <div class="form-row">
-          <label for="email-bottom" class="visually-hidden">Email address</label>
-          <input
-            type="email"
-            id="email-bottom"
-            name="email"
-            placeholder="Enter your email"
-            required
-            class="email-input"
-            autocomplete="email"
-            aria-required="true"
-          />
-          <button type="submit" class="cta-button">Join Early Access</button>
-        </div>
-        <p class="form-note">No spam. Unsubscribe anytime.</p>
-      </form>
-
-      <div id="form-success-bottom" class="form-success" hidden>
-        <span class="success-icon">✓</span>
-        You're on the list! We'll be in touch.
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container" style="flex-direction:column; align-items:flex-start; gap:12px">
-      <div style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:16px; align-items:center">
-        <div class="footer-logo">Kyronix</div>
-        <nav class="footer-links">
-          <a href="/privacy.html">Privacy Policy</a>
-          <a href="/terms.html">Terms of Use</a>
-          <a href="mailto:hello@kyronix.health">hello@kyronix.health</a>
-        </nav>
-      </div>
-      <p class="footer-text">© 2026 Kyronix · Coming soon to iPhone</p>
-      <p class="footer-disclaimer">Kyronix is not a medical device and does not provide medical advice, diagnosis, or treatment. All content is for informational and educational purposes only. Consult a qualified healthcare provider before making any health decisions.</p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
