@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kyronix — Personalized Health Intelligence from DNA + Biometrics</title>
   <meta name="description" content="Kyronix combines your DNA, labs, wearables, and AI to deliver personalized insights for performance, nutrition, supplements, longevity, and medication safety. Join early access." />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <meta property="og:title" content="Kyronix — Personalized Health Intelligence from DNA + Biometrics" />
+  <meta property="og:description" content="Kyronix combines your DNA, labs, wearables, and AI to deliver personalized insights for performance, nutrition, supplements, longevity, and medication safety." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og-image.jpg" />
+  <meta property="og:image:alt" content="Kyronix personalized health intelligence" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kyronix — Personalized Health Intelligence from DNA + Biometrics" />
+  <meta name="twitter:description" content="Kyronix combines your DNA, labs, wearables, and AI to deliver personalized guidance for workouts, nutrition, supplements, longevity, and medication safety." />
+  <meta name="twitter:image" content="/og-image.jpg" />
   <style>
     :root {
       --bg: #0b1020;
@@ -327,7 +341,7 @@
       <div class="cta-final">
         <h2>Ready for health guidance built around you?</h2>
         <p>Join the Kyronix early access list and be first to try personalized health intelligence.</p>
-        <form class="form" method="post" action="#" aria-label="Kyronix waitlist form">
+        <form class="form" method="post" action="https://formspree.io/f/xgonegew" aria-label="Kyronix waitlist form">
           <h3 style="margin-top:0">Get early access to Kyronix</h3>
           <div class="form-grid">
             <div>
@@ -363,8 +377,8 @@
     <div class="container">
       <p>© <span id="year"></span> Kyronix</p>
       <p>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Use</a>
         <a href="#">Medical Disclaimer</a>
         <a href="mailto:hello@kyronix.health">Contact</a>
       </p>
@@ -373,6 +387,21 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    const waitlistForm = document.querySelector('#waitlist form');
+    if (waitlistForm) {
+      waitlistForm.addEventListener('submit', () => {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'waitlist_submitted' });
+
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'waitlist_submitted', {
+            event_category: 'engagement',
+            event_label: 'waitlist_form'
+          });
+        }
+      });
+    }
   </script>
 </body>
 </html>
